@@ -1,5 +1,5 @@
 import {Product} from "../models/Product"
-import { appError } from "../utils/errorHandler"
+import { AppError } from "../utils/errorHandler"
 
 const BASE_URL = "https://dummyjson.com/products";
 
@@ -8,7 +8,7 @@ export async function fetchAllProducts(): Promise <Product[]> {
         const response = await fetch(BASE_URL);
 
         if (!response.ok) {
-            throw new appError(`Failed to fetch products`, response.status);
+            throw new AppError(`Failed to fetch products`, response.status);
         }
         const data = await response.json();
 
@@ -21,8 +21,8 @@ export async function fetchAllProducts(): Promise <Product[]> {
             )
         )
     } catch (error) {
-        if (error instanceof appError) throw error;
-        throw new appError("Network error while fetching products", 500, error);
+        if (error instanceof AppError) throw error;
+        throw new AppError("Network error while fetching products", 500, error);
     }
 }
 
@@ -31,7 +31,7 @@ export async function fetchProductById(id: number): Promise<Product> {
         const response = await fetch(`${BASE_URL}/${id}`);
 
         if (!response.ok) {
-            throw new appError(
+            throw new AppError(
                 `Product with ID ${id} not found`,
                 response.status
             );
@@ -47,9 +47,9 @@ export async function fetchProductById(id: number): Promise<Product> {
         );
 
     } catch (error) {
-        if (error instanceof appError) throw error;
+        if (error instanceof AppError) throw error;
 
-        throw new appError(
+        throw new AppError(
             `Network error while fetching product ${id}`,
             500,
             error

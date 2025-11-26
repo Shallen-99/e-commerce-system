@@ -1,17 +1,17 @@
-export class appError extends Error {
+export class AppError extends Error {
     constructor(
         public message: string,
         public statusCode: number = 500,
         public details?: any,
     ) {
         super(message);
-        this.name = "appError";
+        this.name = "AppError";
     }
 }
 
 export function handleError(error: unknown): void {
-    if (error instanceof appError) {
-        console.error(`appError: ${error.message}`);
+    if (error instanceof AppError) {
+        console.error(`AppError: ${error.message}`);
         console.error(`Status Code: ${error.statusCode}`);
         if(error.details) {
             console.error("Details:", error.details);
