@@ -5,8 +5,8 @@ import {Product} from "../models/Product";
 
 export function calculateTax(product: Product): any {
     if (product.category === "groceries") {
-        product.price * 0.03
+        return product.price * 0.03;
     } else {
-        product.price * 0.0475
+        return product.price * 0.0475;
     } 
 }

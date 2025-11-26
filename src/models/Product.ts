@@ -3,14 +3,16 @@ export class Product {
         public id: number,
         public title: string,
         public category: string,
-        public price: number
+        public price: number,
+        public discountPercentage: number = 0
     ) {}
 
     displayDetails(): string {
-        return `Product: ${this.title} (ID: ${this.id}) - $${this.price.toFixed(2)}`;
+        return `Product: ${this.title} (ID: ${this.id}) $${this.price.toFixed(2)}`;
     }
 
     getPriceWithDiscount(): number {
-        return this.price;
+        const discountAmount = this.price * (this.discountPercentage/100);
+        return this.price - discountAmount;
     }
 }
